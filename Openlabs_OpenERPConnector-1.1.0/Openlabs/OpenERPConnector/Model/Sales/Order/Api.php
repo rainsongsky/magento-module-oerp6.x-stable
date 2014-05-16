@@ -60,7 +60,8 @@ class Openlabs_OpenERPConnector_Model_Sales_Order_Api extends Mage_Sales_Model_O
 
             $collection = Mage::getModel("sales/order")->getCollection()
                 ->addAttributeToSelect('*')
-                ->addAttributeToFilter('imported', array('eq' => $data['imported']));
+                ->addAttributeToFilter('imported', array('eq' => $data['imported']))
+                ->addAttributeToFilter('status', array('nin' => array('canceled','pending_payment')));
 
             /* addAddressFields() is called only if version >= 1400 */
             if(str_replace('.','',Mage::getVersion()) >= 1400) {
